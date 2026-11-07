@@ -1,0 +1,22 @@
+:root{--ink:#141110;--ivory:#f5efe6;--muted:#cfc4ba;--gold:#e8c88f;--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box}html{background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--ivory);font:17px/1.7 -apple-system,"SF Arabic","Segoe UI",Tahoma,sans-serif}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.mark{font-family:Didot,"Bodoni 72",Georgia,serif;font-size:28px;text-decoration:none;direction:ltr}
+nav a{margin-inline-start:18px;color:var(--muted);text-decoration:none;font-size:15px}nav a:hover{color:var(--ivory)}
+.hero{position:relative;min-height:86vh;display:flex;align-items:flex-end;background:url(/img/room.jpg) center 62%/cover;border-radius:28px;overflow:hidden;margin-bottom:64px}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,16,.15),rgba(20,17,16,.1) 45%,rgba(20,17,16,.92))}
+.hero div{position:relative;z-index:1;padding:32px}
+h1{font-family:Didot,"Bodoni 72",Georgia,serif;font-weight:400;font-size:clamp(52px,11vw,104px);line-height:1;margin:0 0 12px;direction:ltr;text-align:start}
+.line{font-size:clamp(20px,3.4vw,28px);margin:0 0 6px}.soon{color:var(--gold);margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:64px}
+.card{border:1px solid var(--line);border-radius:22px;padding:24px;background:rgba(255,255,255,.04)}
+.card h2{font-size:20px;margin:0 0 6px;font-weight:600}.card p{margin:0;color:var(--muted);font-size:15.5px}
+.split{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center;margin-bottom:64px}
+.split img{width:100%;border-radius:34px;border:1px solid var(--line)}
+.split h2{font-size:30px;margin:0 0 10px;font-weight:600}.split p{color:var(--muted);margin:0 0 10px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+footer a{margin-inline-end:14px}
+.page{max-width:680px;margin:0 auto 64px}.page h1{font-size:44px}
+@media(max-width:760px){.grid,.split{grid-template-columns:1fr}.split img{max-width:280px;margin:0 auto;display:block}nav a{margin-inline-start:12px;font-size:14px}.hero{min-height:78vh}}
