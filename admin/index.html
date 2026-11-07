@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'unsafe-inline'; connect-src https://ihqeohtfqwyyaiasoyta.supabase.co wss://ihqeohtfqwyyaiasoyta.supabase.co; img-src data: https://ihqeohtfqwyyaiasoyta.supabase.co; media-src https://ihqeohtfqwyyaiasoyta.supabase.co; base-uri 'none'; form-action 'none'">
+<title>nobody. | الفريق</title>
+<style>
+:root{--ink:#141110;--panel:#1d1917;--raise:#262120;--ivory:#f5efe6;--muted:#cfc4ba;--gold:#e8c88f;--line:rgba(255,255,255,.14);--red:#ef8d7c;--green:#9fd3a8}
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--ivory);font:16px/1.65 -apple-system,"SF Arabic","Segoe UI",Tahoma,sans-serif}
+[hidden]{display:none!important}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 64px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0}
+.mark{font-family:Didot,"Bodoni 72",Georgia,serif;font-size:26px;direction:ltr}
+.who{color:var(--muted);font-size:14px;display:flex;align-items:center;gap:10px}
+.gate{max-width:400px;margin:10vh auto 0}
+h1{font-size:22px;font-weight:600;margin:0 0 6px}
+h2{font-size:17px;font-weight:600;margin:0 0 10px}
+p{margin:0 0 12px}
+.muted{color:var(--muted);font-size:14.5px}
+.card{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--panel);margin-bottom:14px}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:10px}
+input,select,textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;font:inherit;color:var(--ivory);background:var(--ink);border:1px solid var(--line);border-radius:10px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,audio:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+input[dir=ltr]{text-align:left}
+button{font:inherit;color:var(--ivory);background:var(--raise);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer}
+button:hover:not(:disabled){border-color:var(--gold)}
+button:disabled{opacity:.5;cursor:default}
+button.main{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600}
+button.danger{color:var(--red);border-color:rgba(239,141,124,.5)}
+button.link{background:none;border:0;padding:0;color:var(--gold);text-decoration:underline;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.grow{flex:1 1 200px;min-width:0}
+.tabs{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:16px}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;border-radius:0;padding:10px 14px;color:var(--muted);white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--ivory);border-bottom-color:var(--gold)}
+.tag{display:inline-block;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:1px 10px;color:var(--muted)}
+.tag.hot{color:var(--red);border-color:rgba(239,141,124,.5)}
+.tag.on{color:var(--green);border-color:rgba(159,211,168,.5)}
+.quote{background:var(--ink);border-radius:10px;padding:10px 12px;margin:10px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;margin:0 0 14px}
+dt{color:var(--muted);font-size:14px}
+dd{margin:0;overflow-wrap:anywhere}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.photos img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:var(--ink);display:block;margin-bottom:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:none;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--gold);color:var(--ink);font-weight:600}
+.item{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}
+.chatlog{height:46vh;min-height:240px;overflow-y:auto;background:var(--ink);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.msg{max-width:80%;padding:7px 12px;border-radius:12px;background:var(--raise);align-self:flex-start;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.mine{align-self:flex-end;background:#3a2f22}
+.msg small{display:block;color:var(--muted);font-size:12px}
+.msg audio{display:block;max-width:100%;height:36px;margin-top:4px}
+#toast{position:fixed;inset-inline:16px;bottom:16px;max-width:520px;margin:0 auto;padding:12px 16px;border-radius:12px;background:var(--raise);border:1px solid var(--line);z-index:9}
+#toast.bad{border-color:var(--red)}
+.qr{background:#fff;border-radius:10px;padding:10px;width:220px;height:220px;display:block;margin:0 auto 12px}
+code{direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;font-size:14px}
+@media(max-width:560px){dl{grid-template-columns:1fr}dd{margin-bottom:6px}.msg{max-width:92%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark">nobody.</div>
+    <div class="who"><span id="whoami"></span><button id="signout" hidden>خروج</button></div>
+  </header>
+
+  <section id="gate" class="gate" hidden></section>
+
+  <main id="app" hidden>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <section id="panel-reports" hidden></section>
+    <section id="panel-photos" hidden></section>
+    <section id="panel-users" hidden></section>
+    <section id="panel-host" hidden></section>
+  </main>
+</div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"
+        integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+<script>
+'use strict';
+// Everything shown here is written as text nodes, never as HTML: message bodies and names come from users.
+const PROJECT_URL = 'https://ihqeohtfqwyyaiasoyta.supabase.co';
+const PUBLISHABLE_KEY = 'sb_publishable_qzy3hcAKaTktLtKM-P2xMA_PU0vGoyo';
+const HOST_NAME = 'المضيف';
+
+const ERRORS = {
+  AUTH_REQUIRED: 'انتهت الجلسة، سجّل دخولك من جديد.',
+  NOT_ALLOWED: 'ما عندك صلاحية لهذا الإجراء.',
+  NOT_FOUND: 'ما لقينا هذا السجل، يمكن انحذف أو انتهى.',
+  REASON_REQUIRED: 'اكتب سبب واضح، 5 أحرف على الأقل.',
+  STATUS_INVALID: 'الحالة غير صحيحة.',
+  ACTION_INVALID: 'الإجراء غير صحيح.',
+  ALREADY_RESOLVED: 'هذا البلاغ تمت معالجته من قبل.',
+  NOT_PENDING: 'هذي الصورة مو بانتظار المراجعة.',
+  PHOTO_CHANGED: 'المستخدم غيّر الصورة، حدّث القائمة.',
+  STATE_INVALID: 'الحالة غير صحيحة.',
+  LIVE_OPEN: 'فيه جلسة مباشرة مفتوحة، أنهها أول.',
+  SLOT_INVALID: 'اختر وقت في المستقبل.',
+  SLOT_OVERLAP: 'هذا الوقت يتعارض مع موعد ثاني.',
+  SLOT_BOOKED: 'هذا الموعد محجوز، استخدم إلغاء الحجز.',
+  NOT_STARTED: 'الجلسة ما بدت بعد، تقدر تلغي الحجز بدال ما تنهيها.',
+  NOT_CANCELLABLE: 'ما يمكن إلغاء هذا الحجز.',
+  NOT_MEMBER: 'هذي المحادثة مو من جلساتك.',
+  CLOSED: 'الجلسة مقفلة أو ما بدت بعد.',
+  BLOCKED: 'الطرف الثاني أنهى التواصل.',
+  BODY_REQUIRED: 'اكتب رسالة أول.',
+  TOO_LONG: 'الرسالة أطول من 500 حرف.',
+  FILTERED: 'الرسالة فيها كلمة أو رابط أو رقم ممنوع.',
+  RATE_LIMITED: 'رسائل كثيرة بسرعة، انتظر دقيقة.',
+  VOICE_NOT_FOUND: 'الملف الصوتي غير موجود.',
+  VOICE_TOO_LONG: 'الملف الصوتي طويل.',
+};
+const REASONS = { abuse: 'إساءة', harassment: 'مضايقة', threat: 'تهديد', impersonation: 'انتحال', self_harm: 'إيذاء النفس', sexual: 'محتوى جنسي', spam: 'إزعاج', minor: 'قاصر' };
+const ACTIONS = { dismiss: 'رفض البلاغ', hide_message: 'إخفاء الرسالة', warn: 'تحذير', suspend: 'إيقاف', ban: 'حظر' };
+const USER_STATUS = { active: 'فعّال', suspended: 'موقوف', banned: 'محظور', deleting: 'قيد الحذف' };
+const REPORT_STATUS = { open: 'مفتوح', in_review: 'قيد المراجعة', actioned: 'تم الإجراء', dismissed: 'مرفوض' };
+const SLOT_STATUS = { open: 'متاح', booked: 'محجوز', closed: 'مقفل' };
+
+const $ = (id) => document.getElementById(id);
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else if (k === 'class') el.className = v;
+    else if (v === true) el.setAttribute(k, '');
+    else if (v !== false && v !== null && v !== undefined) el.setAttribute(k, v);
+  }
+  el.append(...kids.flat().filter((x) => x !== null && x !== undefined && x !== false));
+  return el;
+}
+const when = (t) => (t ? new Date(t).toLocaleString('ar-u-ca-gregory-nu-latn', { dateStyle: 'medium', timeStyle: 'short' }) : '-');
+
+function arabic(e) {
+  const text = String((e && (e.message || e.error_description)) || '');
+  const code = (e && e.code) || '';
+  const known = Object.keys(ERRORS).find((k) => text === k || text.endsWith(': ' + k));
+  if (known) return ERRORS[known];
+  if (code === 'mfa_verification_failed' || /totp/i.test(text)) return 'رمز المصادقة غير صحيح.';
+  if (code === 'otp_expired' || /expired|invalid.*otp|token/i.test(text)) return 'الرمز غير صحيح أو انتهى.';
+  if (code === 'otp_disabled' || code === 'user_not_found' || /signups? not allowed/i.test(text)) return 'هذا البريد ما له حساب في الفريق.';
+  if (code === 'over_email_send_rate_limit' || (e && e.status === 429) || /rate limit/i.test(text)) return 'محاولات كثيرة، انتظر شوي وجرب.';
+  if (/permission denied/i.test(text)) return 'ما عندك صلاحية لهذا الإجراء.';
+  if (/failed to fetch|network|load failed/i.test(text)) return 'ما قدرنا نوصل للخادم، تأكد من الاتصال.';
+  return 'صار خطأ، جرّب مرة ثانية.';
+}
+let toastTimer;
+function toast(text, bad) {
+  const t = $('toast');
+  t.textContent = text;
+  t.className = bad ? 'bad' : '';
+  t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, bad ? 7000 : 3500);
+}
+// One place for every action: stops double clicks, and turns any failure into Arabic.
+async function act(btn, fn) {
+  if (btn) btn.disabled = true;
+  try { return await fn(); } catch (e) { console.error(e); toast(arabic(e), true); return undefined; } finally { if (btn) btn.disabled = false; }
+}
+async function call(name, args) {
+  const { data, error } = await db.rpc(name, args);
+  if (error) throw error;
+  return data;
+}
+function clear(el, ...kids) { el.replaceChildren(...kids.flat().filter(Boolean)); }
+
+if (window.top !== window.self) { document.body.replaceChildren(); throw new Error('framed'); }   // no click tricks from another site
+if (!window.supabase) {
+  clear($('gate'), h('p', {}, 'ما قدرنا نحمّل الصفحة، تأكد من الاتصال وحدّث.'));
+  $('gate').hidden = false;
+  throw new Error('supabase-js did not load');
+}
+// sessionStorage: closing the tab ends the staff session on a shared computer.
+const db = window.supabase.createClient(PROJECT_URL, PUBLISHABLE_KEY, {
+  auth: { storage: window.sessionStorage, persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
+});
+let me = null;
+
+// ---------- sign-in ----------
+function gate(...kids) {
+  $('app').hidden = true;
+  stopChat();
+  stopHostTimer();
+  clear($('gate'), h('div', { class: 'card' }, kids));
+  $('gate').hidden = false;
+}
+
+function showEmail() {
+  $('signout').hidden = true;
+  $('whoami').textContent = '';
+  const email = h('input', { type: 'email', required: true, dir: 'ltr', autocomplete: 'username', inputmode: 'email' });
+  const send = h('button', { class: 'main', type: 'submit' }, 'أرسل الرمز');
+  gate(
+    h('h1', {}, 'دخول الفريق'),
+    h('p', { class: 'muted' }, 'نرسل رمز إلى بريدك. الدخول للفريق فقط.'),
+    h('form', { onsubmit: (ev) => {
+      ev.preventDefault();
+      const address = email.value.trim();
+      act(send, async () => {
+        const { error } = await db.auth.signInWithOtp({ email: address, options: { shouldCreateUser: false } });
+        if (error) throw error;
+        showCode(address);
+      });
+    } }, h('label', {}, 'البريد', email), send),
+  );
+  email.focus();
+}
+
+function showCode(address) {
+  const code = h('input', { required: true, dir: 'ltr', inputmode: 'numeric', autocomplete: 'one-time-code', maxlength: '10' });
+  const go = h('button', { class: 'main', type: 'submit' }, 'تأكيد');
+  gate(
+    h('h1', {}, 'اكتب الرمز'),
+    h('p', { class: 'muted' }, 'أرسلناه إلى ', h('code', {}, address)),
+    h('form', { onsubmit: (ev) => {
+      ev.preventDefault();
+      act(go, async () => {
+        const { error } = await db.auth.verifyOtp({ email: address, token: code.value.trim(), type: 'email' });
+        if (error) throw error;
+        await route();
+      });
+    } }, h('label', {}, 'الرمز', code), h('div', { class: 'row' }, go, h('button', { type: 'button', onclick: showEmail }, 'رجوع'))),
+  );
+  code.focus();
+}
+
+async function route() {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) return showEmail();
+  const { data: profile, error } = await db.from('profiles').select('role,status,alias').eq('id', session.user.id).maybeSingle();
+  if (error) throw error;
+  if (!profile || profile.status !== 'active' || !['moderator', 'admin', 'host'].includes(profile.role)) {
+    await db.auth.signOut();
+    showEmail();
+    return toast('هذا الحساب ما له صلاحية على لوحة الفريق.', true);
+  }
+  me = { id: session.user.id, role: profile.role };
+  $('signout').hidden = false;
+  $('whoami').textContent = { admin: 'مدير', moderator: 'مشرف', host: 'مضيف' }[profile.role];
+  const aal = await db.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (aal.error) throw aal.error;
+  if (aal.data.currentLevel === 'aal2') return openApp();
+  const factors = await db.auth.mfa.listFactors();
+  if (factors.error) throw factors.error;
+  const ready = (factors.data.totp || []).find((f) => f.status === 'verified');
+  return ready ? showChallenge(ready.id) : showEnroll(factors.data.all || []);
+}
+
+function codeForm(factorId, label) {
+  const code = h('input', { required: true, dir: 'ltr', inputmode: 'numeric', autocomplete: 'one-time-code', maxlength: '6', pattern: '[0-9]{6}' });
+  const go = h('button', { class: 'main', type: 'submit' }, 'تأكيد');
+  const form = h('form', { onsubmit: (ev) => {
+    ev.preventDefault();
+    act(go, async () => {
+      const { error } = await db.auth.mfa.challengeAndVerify({ factorId, code: code.value.trim() });
+      if (error) throw error;
+      await route();
+    });
+  } }, h('label', {}, label, code), go);
+  return { form, code };
+}
+
+function showChallenge(factorId) {
+  const { form, code } = codeForm(factorId, 'الرمز من تطبيق المصادقة');
+  gate(h('h1', {}, 'التحقق الثاني'), h('p', { class: 'muted' }, 'اكتب الرمز المكوّن من 6 أرقام.'), form);
+  code.focus();
+}
+
+async function showEnroll(all) {
+  // A half finished setup from an earlier visit would block a new one.
+  for (const f of all.filter((x) => x.status === 'unverified')) await db.auth.mfa.unenroll({ factorId: f.id });
+  const { data, error } = await db.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'nobody staff ' + Date.now() });
+  if (error) throw error;
+  const qr = data.totp.qr_code.startsWith('data:') ? data.totp.qr_code : 'data:image/svg+xml;utf-8,' + encodeURIComponent(data.totp.qr_code);
+  const { form, code } = codeForm(data.id, 'الرمز من التطبيق');
+  gate(
+    h('h1', {}, 'فعّل التحقق الثاني'),
+    h('p', { class: 'muted' }, 'امسح الرمز بتطبيق مصادقة مثل كلمات السر في iPhone أو Google Authenticator، ثم اكتب الرمز.'),
+    h('img', { class: 'qr', src: qr, alt: 'رمز QR لتفعيل التحقق الثاني' }),
+    h('p', { class: 'muted' }, 'أو أدخل المفتاح يدويا: ', h('code', {}, data.totp.secret)),
+    form,
+  );
+  code.focus();
+}
+
+$('signout').addEventListener('click', () => act($('signout'), async () => {
+  await db.auth.signOut();
+  me = null;
+  showEmail();
+}));
+
+// ---------- tabs ----------
+const TABS = [
+  { id: 'reports', label: 'البلاغات', roles: ['moderator', 'admin'], open: () => loadReports() },
+  { id: 'photos', label: 'الصور', roles: ['moderator', 'admin'], open: () => {} },
+  { id: 'users', label: 'المستخدمون', roles: ['moderator', 'admin'], open: () => {} },
+  { id: 'host', label: 'المضيف', roles: ['host'], open: () => loadHost() },
+];
+function openApp() {
+  $('gate').hidden = true;
+  $('app').hidden = false;
+  buildReports(); buildPhotos(); buildUsers(); buildHost();
+  const mine = TABS.filter((t) => t.roles.includes(me.role));
+  clear($('tabs'), mine.map((t) => h('button', { role: 'tab', id: 'tab-' + t.id, 'aria-selected': 'false', onclick: () => selectTab(t) }, t.label)));
+  selectTab(mine[0]);
+}
+function selectTab(tab) {
+  for (const t of TABS) {
+    $('panel-' + t.id).hidden = t !== tab;
+    const b = $('tab-' + t.id);
+    if (b) b.setAttribute('aria-selected', String(t === tab));
+  }
+  if (tab.id !== 'host') { stopChat(); stopHostTimer(); }
+  act(null, tab.open);
+}
+
+// ---------- reports ----------
+let reportFilter;
+function buildReports() {
+  reportFilter = h('select', { onchange: () => act(null, loadReports) },
+    h('option', { value: '' }, 'بانتظار القرار'), h('option', { value: 'actioned' }, 'تم الإجراء'), h('option', { value: 'dismissed' }, 'مرفوضة'));
+  clear($('panel-reports'),
+    h('div', { class: 'row', style: 'margin-bottom:14px' },
+      h('label', { class: 'grow', style: 'margin:0' }, 'عرض', reportFilter),
+      h('button', { onclick: (ev) => act(ev.currentTarget, loadReports) }, 'تحديث')),
+    h('div', { id: 'report-list' }));
+}
+async function loadReports() {
+  const rows = await call('list_reports', { status: reportFilter.value || null });
+  clear($('report-list'), rows.length ? rows.map(reportCard) : h('p', { class: 'muted' }, 'ما فيه بلاغات هنا.'));
+}
+function reportCard(r) {
+  const open = r.status === 'open' || r.status === 'in_review';
+  const note = h('input', { placeholder: 'ملاحظة القرار، مطلوبة' });
+  const body = r.message_snapshot
+    ? h('div', { class: 'quote' }, r.message_snapshot)
+    : h('p', { class: 'muted' }, r.has_voice ? 'بلاغ عن رسالة صوتية، الملف ما يظهر هنا.' : 'بلاغ عن حساب، بدون رسالة.');
+  const pick = (action) => h('button', {
+    class: action === 'ban' || action === 'suspend' ? 'danger' : '',
+    hidden: action === 'hide_message' && !r.message_id,
+    onclick: (ev) => {
+      const btn = ev.currentTarget;
+      if (action === 'ban' && !confirm('تأكيد حظر هذا الحساب؟')) return;
+      act(btn, async () => {
+        await call('resolve_report', { report_id: r.id, action, note: note.value });
+        toast('تم: ' + ACTIONS[action]);
+        await loadReports();
+      });
+    },
+  }, ACTIONS[action]);
+  return h('div', { class: 'card' },
+    h('div', { class: 'row' },
+      h('span', { class: 'tag' + (r.priority === 1 ? ' hot' : '') }, REASONS[r.reason] || r.reason),
+      h('span', { class: 'tag' }, REPORT_STATUS[r.status] || r.status),
+      r.message_hidden ? h('span', { class: 'tag' }, 'مخفية') : null,
+      h('span', { class: 'muted' }, when(r.created_at))),
+    body,
+    h('p', { class: 'muted' }, 'المبلَّغ عنه: ', r.target_name || 'حساب محذوف',
+      r.target_status ? ' · ' + (USER_STATUS[r.target_status] || r.target_status) : '',
+      ' · بلاغات عليه: ', String(r.reports_against), ' ',
+      r.target_id ? h('button', { class: 'link', onclick: () => openUser(r.target_id) }, 'فتح الحساب') : null),
+    open ? [note, h('div', { class: 'row', style: 'margin-top:10px' }, Object.keys(ACTIONS).map(pick))]
+         : h('p', { class: 'muted' }, 'القرار: ', ACTIONS[r.resolution] || '-', ' · ', when(r.resolved_at)));
+}
+
+// ---------- photos ----------
+function buildPhotos() {
+  const reason = h('input', { placeholder: 'مثال: مراجعة الصور اليومية', required: true });
+  const list = h('div', { class: 'photos' });
+  const load = async () => {
+    const rows = await call('pending_photos', { reason: reason.value });
+    const cards = await Promise.all(rows.map((p) => photoCard(p, load)));
+    clear(list, cards);
+    if (!rows.length) toast('ما فيه صور بانتظار المراجعة.');
+  };
+  clear($('panel-photos'),
+    h('form', { class: 'card', onsubmit: (ev) => { ev.preventDefault(); act(ev.submitter, load); } },
+      h('label', {}, 'سبب فتح القائمة، مطلوب ويتسجل', reason),
+      h('button', { class: 'main', type: 'submit' }, 'عرض الصور')),
+    list);
+}
+async function photoCard(p, reload) {
+  const { data, error } = await db.storage.from('avatars').createSignedUrl(p.path, 300);
+  const reason = h('input', { placeholder: 'سبب الرفض' });
+  const decide = (approve) => (ev) => act(ev.currentTarget, async () => {
+    await call('review_photo', { user_id: p.user_id, approve, reason: approve ? null : reason.value, path: p.path });
+    toast(approve ? 'تم القبول.' : 'تم الرفض.');
+    await reload();
+  });
+  return h('div', { class: 'card' },
+    error ? h('p', { class: 'muted' }, 'ما قدرنا نفتح الصورة.') : h('img', { src: data.signedUrl, alt: 'صورة بانتظار المراجعة' }),
+    reason,
+    h('div', { class: 'row', style: 'margin-top:10px' },
+      h('button', { class: 'main', onclick: decide(true) }, 'قبول'),
+      h('button', { class: 'danger', onclick: decide(false) }, 'رفض')));
+}
+
+// ---------- users ----------
+let userId, userReason, userResult;
+function buildUsers() {
+  userId = h('input', { dir: 'ltr', required: true, placeholder: '00000000-0000-0000-0000-000000000000' });
+  userReason = h('input', { required: true, placeholder: 'مثال: مراجعة بلاغ تهديد' });
+  userResult = h('div');
+  clear($('panel-users'),
+    h('form', { class: 'card', onsubmit: (ev) => { ev.preventDefault(); act(ev.submitter, viewUser); } },
+      h('label', {}, 'معرّف الحساب', userId),
+      h('label', {}, 'سبب فتح الحساب، مطلوب ويتسجل', userReason),
+      h('button', { class: 'main', type: 'submit' }, 'عرض')),
+    userResult);
+}
+function openUser(id) {
+  selectTab(TABS.find((t) => t.id === 'users'));
+  userId.value = id;
+  clear(userResult);
+  userReason.focus();
+}
+async function viewUser() {
+  const id = userId.value.trim();
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return toast('معرّف الحساب غير صحيح.', true);
+  const u = await call('admin_view_user', { user_id: id, reason: userReason.value });
+  if (!u.found) return clear(userResult, h('p', { class: 'muted' }, 'ما لقينا هذا الحساب.'));
+  const field = (k, v) => [h('dt', {}, k), h('dd', { dir: 'auto' }, v === null || v === undefined || v === '' ? '-' : String(v))];
+  const why = h('input', { placeholder: 'سبب تغيير الحالة، مطلوب' });
+  const set = (status, label, danger) => h('button', {
+    class: danger ? 'danger' : '',
+    disabled: u.status === status,
+    onclick: (ev) => {
+      const btn = ev.currentTarget;
+      if (status === 'banned' && !confirm('تأكيد حظر هذا الحساب؟')) return;
+      act(btn, async () => {
+        await call('set_user_status', { user_id: id, status, reason: why.value });
+        toast('تم تحديث الحالة.');
+        await viewUser();
+      });
+    },
+  }, label);
+  clear(userResult, h('div', { class: 'card' },
+    h('dl', {},
+      field('الاسم المستعار', u.alias), field('اليوزر', u.username), field('البريد', u.email), field('الجوال', u.phone),
+      field('الحالة', USER_STATUS[u.status] || u.status), field('الدور', { user: 'مستخدم', host: 'مضيف', moderator: 'مشرف', admin: 'مدير' }[u.role]),
+      field('الخطة', u.plan === 'plus' ? 'Plus' : 'مجانية'), field('الخطة حتى', u.plan_until ? when(u.plan_until) : null),
+      field('الانضمام', when(u.created_at)), field('بلاغات عليه', u.reports_against)),
+    u.status === 'deleting' ? null : [why, h('div', { class: 'row', style: 'margin-top:10px' },
+      set('active', 'تفعيل'), set('suspended', 'إيقاف', true), set('banned', 'حظر', true))]));
+}
+
+// ---------- host ----------
+let stateBox, slotList, sessionList, chatBox, hostTimer;
+function buildHost() {
+  stateBox = h('div', { class: 'seg', role: 'group', 'aria-label': 'حالة المضيف' });
+  const starts = h('input', { type: 'datetime-local', required: true });
+  slotList = h('div');
+  sessionList = h('div');
+  chatBox = h('div');
+  clear($('panel-host'),
+    h('div', { class: 'card' }, h('h2', {}, 'حالتي'), stateBox),
+    h('div', { class: 'card' }, h('h2', {}, 'الجلسات'), sessionList),
+    chatBox,
+    h('div', { class: 'card' }, h('h2', {}, 'المواعيد'),
+      h('form', { class: 'row', style: 'margin-bottom:10px', onsubmit: (ev) => {
+        ev.preventDefault();
+        act(ev.submitter, async () => {
+          await call('open_slot', { starts_at: new Date(starts.value).toISOString() });
+          starts.value = '';
+          toast('انفتح الموعد، مدته ساعة.');
+          await loadSlots();
+        });
+      } }, h('label', { class: 'grow', style: 'margin:0' }, 'موعد جديد', starts), h('button', { class: 'main', type: 'submit' }, 'فتح')),
+      slotList));
+}
+function stopHostTimer() { clearInterval(hostTimer); hostTimer = null; }
+async function loadHost() {
+  await Promise.all([loadState(), loadSessions(), loadSlots()]);
+  stopHostTimer();
+  hostTimer = setInterval(() => { loadSessions().catch(() => {}); loadState().catch(() => {}); }, 20000);
+}
+async function loadState() {
+  const { data, error } = await db.from('host_status').select('state').maybeSingle();
+  if (error) throw error;
+  const now = data && data.state;
+  clear(stateBox, [['online', 'متصل'], ['busy', 'مشغول'], ['offline', 'غير متصل']].map(([state, label]) =>
+    h('button', { 'aria-pressed': String(now === state), onclick: (ev) => act(ev.currentTarget, async () => {
+      await call('set_host_state', { state });
+      await loadState();
+    }) }, label)));
+}
+async function loadSlots() {
+  const { data, error } = await db.from('trusted_slots').select('id,starts_at,ends_at,status')
+    .gt('ends_at', new Date().toISOString()).neq('status', 'closed').order('starts_at').limit(100);
+  if (error) throw error;
+  clear(slotList, data.length ? data.map((s) => h('div', { class: 'item' },
+    h('span', {}, when(s.starts_at), ' ', h('span', { class: 'tag' }, SLOT_STATUS[s.status] || s.status)),
+    s.status === 'open' ? h('button', { onclick: (ev) => act(ev.currentTarget, async () => {
+      await call('close_slot', { slot_id: s.id });
+      await loadSlots();
+    }) }, 'إقفال') : null)) : h('p', { class: 'muted' }, 'ما فيه مواعيد قادمة.'));
+}
+async function loadSessions() {
+  const rows = await call('host_sessions');
+  clear(sessionList, rows.length ? rows.map((s) => h('div', { class: 'item' },
+    h('span', {}, s.public_name, ' ',
+      h('span', { class: 'tag' + (s.now ? ' on' : '') }, s.now ? 'الآن' : 'قادمة'), ' ',
+      h('span', { class: 'tag' }, s.kind === 'live' ? 'مباشرة' : 'بموعد'),
+      h('span', { class: 'muted' }, ' ', when(s.starts_at))),
+    h('span', { class: 'row' },
+      s.now ? h('button', { class: 'main', onclick: () => act(null, () => openChat(s)) }, 'فتح الشات') : null,
+      s.now ? h('button', { onclick: (ev) => {
+        const btn = ev.currentTarget;
+        if (!confirm('إنهاء الجلسة؟')) return;
+        act(btn, async () => {
+          await call('host_end_session', { conversation_id: s.conversation_id });
+          toast('انتهت الجلسة.');
+          if (chat && chat.id === s.conversation_id) stopChat();
+          await Promise.all([loadSessions(), loadState()]);
+        });
+      } }, 'إنهاء') : null,
+      h('button', { class: 'danger', onclick: (ev) => {
+        const btn = ev.currentTarget;
+        if (!confirm('إلغاء الحجز؟ يرجع للمستخدم رصيد جلسة.')) return;
+        act(btn, async () => {
+          await call('host_cancel_booking', { booking_id: s.booking_id });
+          toast('انلغى الحجز ورجع الرصيد.');
+          if (chat && chat.id === s.conversation_id) stopChat();
+          await Promise.all([loadSessions(), loadState(), loadSlots()]);
+        });
+      } }, 'إلغاء الحجز')))) : h('p', { class: 'muted' }, 'ما فيه جلسات مفتوحة.'));
+}
+
+// ---------- chat ----------
+// Realtime wakes the list up. The list itself always comes from a normal read, which the database filters,
+// and a slow timer covers a dropped socket: a paying person must not go unanswered.
+let chat = null;
+function stopChat() {
+  if (!chat) return;
+  clearInterval(chat.timer);
+  db.removeChannel(chat.channel);
+  chat = null;
+  if (chatBox) clear(chatBox);
+}
+async function openChat(s) {
+  stopChat();
+  const log = h('div', { class: 'chatlog', tabindex: '0', 'aria-label': 'الرسائل', 'aria-live': 'polite' });
+  const text = h('input', { maxlength: '500', placeholder: 'اكتب رسالتك', 'aria-label': 'رسالتك' });
+  const send = h('button', { class: 'main', type: 'submit' }, 'إرسال');
+  clear(chatBox, h('div', { class: 'card' },
+    h('div', { class: 'row', style: 'justify-content:space-between;margin-bottom:10px' },
+      h('h2', { style: 'margin:0' }, s.public_name),
+      h('button', { onclick: stopChat }, 'إغلاق')),
+    log,
+    h('form', { class: 'row', onsubmit: (ev) => {
+      ev.preventDefault();
+      act(send, async () => {
+        await call('host_send', { conversation_id: s.conversation_id, body: text.value });
+        text.value = '';
+        await refreshChat();
+        text.focus();
+      });
+    } }, h('div', { class: 'grow' }, text), send)));
+  const here = { id: s.conversation_id, log, seen: new Map(), timer: null, channel: null };
+  chat = here;
+  here.channel = db.channel('host-chat-' + s.conversation_id)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'messages', filter: 'conversation_id=eq.' + s.conversation_id },
+      () => refreshChat().catch(() => {}))
+    .subscribe();
+  here.timer = setInterval(() => refreshChat().catch(() => {}), 10000);
+  await refreshChat();
+  text.focus();
+}
+async function refreshChat() {
+  const here = chat;
+  if (!here) return;
+  const { data, error } = await db.from('messages')
+    .select('id,public_name,body,voice_path,voice_seconds,created_at')
+    .eq('conversation_id', here.id).order('created_at', { ascending: false }).limit(200);
+  if (error) throw error;
+  if (chat !== here) return;
+  const ids = new Set(data.map((m) => m.id));
+  for (const [id, el] of here.seen) if (!ids.has(id)) { el.remove(); here.seen.delete(id); }   // hidden by a moderator
+  const end = here.log.scrollHeight - here.log.scrollTop - here.log.clientHeight < 60;
+  for (const m of data.reverse()) {
+    if (here.seen.has(m.id)) continue;
+    const el = h('div', { class: 'msg' + (m.public_name === HOST_NAME ? ' mine' : '') },
+      h('small', {}, m.public_name, ' · ', when(m.created_at)), m.body);
+    here.seen.set(m.id, el);
+    here.log.append(el);
+    if (m.voice_path) addVoice(el, m);
+  }
+  if (end) here.log.scrollTop = here.log.scrollHeight;
+}
+async function addVoice(el, m) {
+  const { data, error } = await db.storage.from('voice').createSignedUrl(m.voice_path, 3600);
+  el.append(error ? h('span', { class: 'muted' }, 'ما قدرنا نفتح الرسالة الصوتية.')
+    : h('audio', { controls: true, preload: 'none', src: data.signedUrl, 'aria-label': 'رسالة صوتية ' + m.voice_seconds + ' ثانية' }));
+}
+
+db.auth.onAuthStateChange((event) => {
+  if (event === 'SIGNED_OUT' && me) { me = null; showEmail(); toast('انتهت الجلسة، سجّل دخولك من جديد.', true); }
+});
+act(null, route).then(() => { if ($('gate').hidden && $('app').hidden) showEmail(); });
+</script>
+</body>
+</html>
