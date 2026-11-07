@@ -2,10 +2,16 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-lQlEhW8sHY+7xtkUgGwsh58dAeGhX+8nhvLr/VvJdhE=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js; style-src 'unsafe-inline'; connect-src https://ihqeohtfqwyyaiasoyta.supabase.co wss://ihqeohtfqwyyaiasoyta.supabase.co; img-src data: https://ihqeohtfqwyyaiasoyta.supabase.co; media-src https://ihqeohtfqwyyaiasoyta.supabase.co; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-EHf81l7MFejgZRua6BCXKBYzO+yQJ5S88W0xwddB5yY=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js; style-src 'unsafe-inline'; connect-src https://ihqeohtfqwyyaiasoyta.supabase.co wss://ihqeohtfqwyyaiasoyta.supabase.co; img-src data: https://ihqeohtfqwyyaiasoyta.supabase.co; media-src https://ihqeohtfqwyyaiasoyta.supabase.co; base-uri 'none'; form-action 'none'">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="nobody. إدارة">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#141110">
+<link rel="apple-touch-icon" href="/icon.png">
 <title>nobody. | الفريق</title>
 <style>
 :root{--ink:#141110;--panel:#1d1917;--raise:#262120;--ivory:#f5efe6;--muted:#cfc4ba;--gold:#e8c88f;--line:rgba(255,255,255,.14);--red:#ef8d7c;--green:#9fd3a8}
@@ -14,7 +20,7 @@ html{background:var(--ink)}
 body{margin:0;background:var(--ink);color:var(--ivory);font:16px/1.65 -apple-system,"SF Arabic","Segoe UI",Tahoma,sans-serif}
 [hidden]{display:none!important}
 .wrap{max-width:980px;margin:0 auto;padding:0 16px 64px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;padding-top:max(18px,env(safe-area-inset-top))}
 .mark{font-family:Didot,"Bodoni 72",Georgia,serif;font-size:26px;direction:ltr}
 .who{color:var(--muted);font-size:14px;display:flex;align-items:center;gap:10px}
 .gate{max-width:400px;margin:10vh auto 0}
@@ -103,6 +109,7 @@ const ERRORS = {
   NOT_PENDING: 'هذي الصورة مو بانتظار المراجعة.',
   PHOTO_CHANGED: 'المستخدم غيّر الصورة، حدّث القائمة.',
   STATE_INVALID: 'الحالة غير صحيحة.',
+  QUERY_TOO_SHORT: 'اكتب 3 أحرف على الأقل للبحث.',
   LIVE_OPEN: 'فيه جلسة مباشرة مفتوحة، أنهها أول.',
   SLOT_INVALID: 'اختر وقت في المستقبل.',
   SLOT_OVERLAP: 'هذا الوقت يتعارض مع موعد ثاني.',
@@ -422,17 +429,32 @@ async function photoCard(p, reload) {
 }
 
 // ---------- users ----------
-let userId, userReason, userResult;
+let userId, userReason, userResult, findBox, findList;
 function buildUsers() {
   userId = h('input', { dir: 'ltr', required: true, placeholder: '00000000-0000-0000-0000-000000000000' });
   userReason = h('input', { required: true, placeholder: 'مثال: مراجعة بلاغ تهديد' });
   userResult = h('div');
+  findBox = h('input', { dir: 'auto', placeholder: 'بريد، جوال، يوزر نيم أو معرّف' });
+  findList = h('div');
   clear($('panel-users'),
+    me.role === 'admin' ? h('form', { class: 'card', onsubmit: (ev) => { ev.preventDefault(); act(ev.submitter, findUser); } },
+      h('h2', {}, 'بحث عن شخص'),
+      h('label', {}, 'ابحث بـ', findBox),
+      h('p', { class: 'muted' }, 'سبب البحث من الخانة تحت، وكل بحث يتسجل.'),
+      h('button', { class: 'main', type: 'submit' }, 'بحث'), findList) : null,
     h('form', { class: 'card', onsubmit: (ev) => { ev.preventDefault(); act(ev.submitter, viewUser); } },
       h('label', {}, 'معرّف الحساب', userId),
       h('label', {}, 'سبب فتح الحساب، مطلوب ويتسجل', userReason),
       h('button', { class: 'main', type: 'submit' }, 'عرض')),
     userResult);
+}
+async function findUser() {
+  const rows = await call('admin_find_user', { query: findBox.value, reason: userReason.value });
+  if (!rows.length) return clear(findList, h('p', { class: 'muted' }, 'ما لقينا أحد.'));
+  clear(findList, rows.map((r) => h('div', { class: 'item' },
+    h('div', { class: 'grow', dir: 'auto' }, (r.username || '-') + ' · ', h('code', {}, r.email || '-'), ' · ', h('code', {}, r.phone || '-'),
+      ' ', h('span', { class: 'tag' + (r.status === 'active' ? '' : ' hot') }, USER_STATUS[r.status] || r.status)),
+    h('button', { type: 'button', onclick: (ev) => { userId.value = r.user_id; act(ev.currentTarget, viewUser); } }, 'فتح'))));
 }
 function openUser(id) {
   selectTab(TABS.find((t) => t.id === 'users'));
@@ -440,13 +462,22 @@ function openUser(id) {
   clear(userResult);
   userReason.focus();
 }
+const PLACE = { room: 'غرفة', one_to_one: 'محادثة خاصة', trusted: 'جلسة موثوقة' };
+async function showMessages(id, box) {
+  const rows = await call('admin_user_messages', { user_id: id, reason: userReason.value });
+  if (!rows.length) return clear(box, h('p', { class: 'muted' }, 'ما فيه رسائل محفوظة. الرسائل تنحذف بعد 30 يوم في الغرف و90 يوم في المحادثات.'));
+  clear(box, h('p', { class: 'muted' }, rows.length + ' رسالة، الأحدث أولاً. الذهبي من هذا الشخص.'),
+    h('div', { class: 'chatlog', style: 'height:auto;max-height:70vh' }, rows.map((m) => h('div', { class: 'msg' + (m.mine ? ' mine' : '') },
+      h('small', { dir: 'auto' }, (m.public_name || '-') + ' · ' + (PLACE[m.where] || m.where) + (m.where === 'room' ? ': ' + m.place : '') + ' · ' + when(m.created_at) + (m.hidden ? ' · مخفية' : '')),
+      m.body !== null && m.body !== undefined ? h('span', { dir: 'auto' }, m.body) : '🎤 رسالة صوتية ' + m.voice_seconds + ' ث'))));
+}
 async function viewUser() {
   const id = userId.value.trim();
   if (!/^[0-9a-f-]{36}$/i.test(id)) return toast('معرّف الحساب غير صحيح.', true);
   const u = await call('admin_view_user', { user_id: id, reason: userReason.value });
   if (!u.found) return clear(userResult, h('p', { class: 'muted' }, 'ما لقينا هذا الحساب.'));
   const field = (k, v) => [h('dt', {}, k), h('dd', { dir: 'auto' }, v === null || v === undefined || v === '' ? '-' : String(v))];
-  const why = h('input', { placeholder: 'سبب تغيير الحالة، مطلوب' });
+  const why = h('input', { placeholder: 'سبب تغيير الحالة أو الحذف، مطلوب' });
   const set = (status, label, danger) => h('button', {
     class: danger ? 'danger' : '',
     disabled: u.status === status,
@@ -460,6 +491,23 @@ async function viewUser() {
       });
     },
   }, label);
+  const msgBox = h('div');
+  const ban = h('input', { type: 'checkbox', checked: true, style: 'display:inline;width:auto;margin:0 0 0 6px' });
+  const admin = me.role === 'admin' && u.status !== 'deleting' ? h('div', { class: 'card' },
+    h('h2', {}, 'صلاحيات المدير'),
+    h('div', { class: 'row' },
+      h('button', { onclick: (ev) => act(ev.currentTarget, () => showMessages(id, msgBox)) }, 'عرض رسائله'),
+      h('button', { class: 'danger', onclick: (ev) => {
+        const btn = ev.currentTarget;
+        if (!confirm('حذف هذا الحساب نهائياً؟ ما يمكن التراجع.')) return;
+        act(btn, async () => {
+          await call('admin_delete_user', { user_id: id, reason: why.value, ban: ban.checked });
+          toast('انحذف الحساب.');
+          await viewUser();
+        });
+      } }, 'حذف الحساب')),
+    h('label', { style: 'margin-top:10px' }, ban, 'امنعه يسجل مرة ثانية بنفس البريد والجوال'),
+    msgBox) : null;
   clear(userResult, h('div', { class: 'card' },
     h('dl', {},
       field('الاسم المستعار', u.alias), field('اليوزر', u.username), field('البريد', u.email), field('الجوال', u.phone),
@@ -467,7 +515,7 @@ async function viewUser() {
       field('الخطة', u.plan === 'plus' ? 'Plus' : 'مجانية'), field('الخطة حتى', u.plan_until ? when(u.plan_until) : null),
       field('الانضمام', when(u.created_at)), field('بلاغات عليه', u.reports_against)),
     u.status === 'deleting' ? null : [why, h('div', { class: 'row', style: 'margin-top:10px' },
-      set('active', 'تفعيل'), set('suspended', 'إيقاف', true), set('banned', 'حظر', true))]));
+      set('active', 'تفعيل'), set('suspended', 'إيقاف', true), set('banned', 'حظر', true))]), admin);
 }
 
 // ---------- host ----------

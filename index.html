@@ -1,15 +1,222 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>nobody. | تكلّم بحرية</title><meta name="description" content="مكان هادئ تتكلم فيه، وأنت تختار وش يظهر للناس. للبالغين 18+.">
-<meta property="og:title" content="nobody."><meta property="og:description" content="مكان هادئ تتكلم فيه، وأنت تختار وش يظهر للناس. للبالغين 18+.">
-<link rel="icon" href="/icon.png"><link rel="stylesheet" href="/style.css"></head>
-<body><div class="wrap">
-<header><a class="mark" href="/">nobody.</a><nav><a href="/legal/privacy-ar.html">الخصوصية</a><a href="/legal/terms-ar.html">الشروط</a><a href="/support/">الدعم</a><a href="/en/">English</a></nav></header>
-<main>
-<section class="hero"><div><h1>nobody.</h1><p class="line">قول اللي ما قلته لأحد</p><p class="soon">قريباً على iPhone · للبالغين 18+</p></div></section>
-<section class="grid"><div class="card"><h2>العالم</h2><p>غرف محادثة حسب الدولة واللغة، بإشراف فعلي.</p></div><div class="card"><h2>محادثة ثنائية</h2><p>محادثة نصية لا تبدأ إلا بقبول الطرفين.</p></div><div class="card"><h2>جلسة موثوقة</h2><p>شات خاص مع المضيف بالكتابة أو الصوت، الآن أو بموعد.</p></div></section>
-<section class="split"><div><h2>أنت تختار وش يظهر</h2><p>يوزر نيم وصورة تظهرهم أو تخفيهم متى ما تبي. بريدك ورقمك ما يظهرون لأي مستخدم.</p><p>بلّغ أو احظر من أي محادثة، وفريق الإشراف يراجع كل بلاغ.</p></div><img src="/img/world.jpg" alt="شاشة العالم في تطبيق nobody."></section>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>nobody. | قول اللي ما قلته لأحد</title>
+<meta name="description" content="nobody. تطبيق iPhone للبالغين 18+: غرف حسب الدولة واللغة، محادثة ثنائية بالقبول فقط، وجلسة موثوقة مع المضيف. أنت تختار وش يظهر منك. قريباً على App Store.">
+<meta name="theme-color" content="#141110">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="nobody. | قول اللي ما قلته لأحد">
+<meta property="og:description" content="مساحة هادئة للكلام، وأنت تختار وش يظهر منك. للبالغين 18+. قريباً على App Store.">
+<meta property="og:image" content="https://nobaady.com/img/hero.jpg">
+<meta property="og:locale" content="ar_AE">
+<link rel="canonical" href="https://nobaady.com/">
+<link rel="alternate" hreflang="ar" href="https://nobaady.com/">
+<link rel="alternate" hreflang="en" href="https://nobaady.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://nobaady.com/">
+<link rel="icon" href="/img/icon-48.png" sizes="48x48">
+<link rel="apple-touch-icon" href="/img/icon-180.png">
+<link rel="preload" as="image" href="/img/hero-800.jpg" imagesrcset="/img/hero-800.jpg 860w, /img/hero.jpg 1400w" imagesizes="(min-width:900px) 440px, 100vw">
+<link rel="stylesheet" href="/style.css">
+<script>(function(d){if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('motion');d.classList.add('js');setTimeout(function(){if(!window.__nobody)d.classList.remove('js')},2500)})(document.documentElement)</script>
+<script src="/js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<canvas id="ambient" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="arcg" gradientUnits="userSpaceOnUse" x1="9" y1="23" x2="93" y2="74">
+    <stop offset="0" stop-color="#f5efe6" stop-opacity="0"/><stop offset=".55" stop-color="#f5efe6"/><stop offset=".8" stop-color="#f5efe6" stop-opacity=".9"/><stop offset="1" stop-color="#f5efe6" stop-opacity="0"/>
+  </linearGradient></defs></svg>
+
+<div class="wrap">
+<header class="top">
+  <a class="mark" href="/" aria-label="nobody. الصفحة الرئيسية">nobody.<svg class="arc" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="100" stroke="url(#arcg)" d="M9.3 22.7A49 49 0 0 1 93 73.5"/></svg></a>
+  <nav class="nav" aria-label="القائمة">
+    <a class="opt" href="#services">الخدمات</a>
+    <a class="opt" href="#plans">الاشتراك</a>
+    <a href="/support/">الدعم</a>
+    <a class="lang" href="/en/" lang="en" hreflang="en">EN</a>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" aria-labelledby="t-hero">
+  <figure class="hero-media">
+    <img src="/img/hero-800.jpg" srcset="/img/hero-800.jpg 860w, /img/hero.jpg 1400w" sizes="(min-width:900px) 440px, 100vw" width="860" height="1864"
+      alt="شخصان يجلسان بعيداً عن بعض في غرفة هادئة، وضوء دافئ يدخل من باب مقوّس" fetchpriority="high">
+    <span class="arch-light" aria-hidden="true"></span>
+    <span class="dust" aria-hidden="true">
+      <i style="--x:62%;--y:38%;--s:3px;--d:14s;--w:0s"></i><i style="--x:70%;--y:52%;--s:2px;--d:18s;--w:-4s"></i><i style="--x:80%;--y:30%;--s:2px;--d:16s;--w:-9s"></i><i style="--x:88%;--y:46%;--s:3px;--d:20s;--w:-2s"></i><i style="--x:55%;--y:60%;--s:2px;--d:17s;--w:-11s"></i><i style="--x:76%;--y:64%;--s:2px;--d:22s;--w:-6s"></i><i style="--x:66%;--y:26%;--s:2px;--d:19s;--w:-14s"></i><i style="--x:92%;--y:58%;--s:2px;--d:15s;--w:-7s"></i><i style="--x:84%;--y:22%;--s:3px;--d:21s;--w:-3s"></i><i style="--x:58%;--y:44%;--s:2px;--d:16s;--w:-12s"></i><i style="--x:73%;--y:40%;--s:2px;--d:18s;--w:-16s"></i><i style="--x:95%;--y:34%;--s:2px;--d:20s;--w:-5s"></i>
+    </span>
+  </figure>
+  <div class="hero-copy">
+    <h1 id="t-hero"><span class="mark">nobody.<svg class="arc" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="100" stroke="url(#arcg)" d="M9.3 22.7A49 49 0 0 1 93 73.5"/></svg></span></h1>
+    <p class="tagline">قول اللي ما قلته لأحد</p>
+    <p class="lede">مساحة هادئة للكلام. تختار اسمك وصورتك، وتقرر وش يظهر منك.</p>
+    <div class="pills">
+      <span class="pill glass gold"><span class="dot" aria-hidden="true"></span>قريباً على App Store</span>
+      <span class="pill glass"><span>للبالغين <bdi dir="ltr">18+</bdi> فقط</span></span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="world" aria-labelledby="t-world">
+  <div class="world">
+    <div class="globe" data-globe="/img/earth-night.jpg" role="img" aria-label="كرة أرضية ليلية تدور ببطء وتلمع فيها أضواء المدن">
+      <span class="globe-still" aria-hidden="true"></span>
+      <canvas aria-hidden="true"></canvas>
+    </div>
+    <div class="rise">
+      <span class="kicker">العالم</span>
+      <h2 class="h2" id="t-world">غرف حسب الدولة واللغة</h2>
+      <p class="sub">ادخل غرفة بلدك أو لغتك وشارك في الحديث. كل الغرف تحت إشراف فعلي ومستمر.</p>
+      <div class="chips" role="group" aria-label="حرّك الكرة إلى منطقة">
+        <button class="chip glass" type="button" data-fly="50,25" aria-pressed="true">الخليج</button>
+        <button class="chip glass" type="button" data-fly="37,32" aria-pressed="false">الشرق الأوسط</button>
+        <button class="chip glass" type="button" data-fly="10,50" aria-pressed="false">أوروبا</button>
+        <button class="chip glass" type="button" data-fly="-90,35" aria-pressed="false">أمريكا</button>
+      </div>
+      <p class="hint">اسحب الكرة لتدويرها.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services" aria-labelledby="t-services">
+  <div class="rise">
+    <span class="kicker">الخدمات</span>
+    <h2 class="h2" id="t-services">ثلاث طرق للكلام</h2>
+  </div>
+  <div class="cards">
+    <article class="card glass rise d1">
+      <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg></span>
+      <h3>العالم</h3>
+      <p>غرف محادثة حسب الدولة واللغة، تكتب فيها وتقرأ وتتعرّف على ناس يشاركونك نفس المكان أو نفس اللغة.</p>
+      <p class="note">الغرف تحت إشراف فعلي، والبلاغات تُراجع.</p>
+    </article>
+    <article class="card glass rise d2">
+      <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5"/></svg></span>
+      <h3>محادثة ثنائية</h3>
+      <p>محادثة نصية خاصة بين شخصين. تفتح فقط لما ترسل طلباً من رسالة في غرفة، ويقبل الطرف الثاني.</p>
+      <ol class="flow" aria-label="كيف تبدأ">
+        <li>رسالة في غرفة</li><li class="to" aria-hidden="true">←</li><li>طلب</li><li class="to" aria-hidden="true">←</li><li>قبول</li>
+      </ol>
+      <p class="note">ما فيه توصيل تلقائي بين الناس أبداً.</p>
+    </article>
+    <article class="card glass rise d3">
+      <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3.5" y="14" width="4" height="6" rx="1.6"/><rect x="16.5" y="14" width="4" height="6" rx="1.6"/></svg></span>
+      <h3>جلسة موثوقة</h3>
+      <p>ساعة كاملة في محادثة خاصة مع المضيف، بالكتابة أو بالرسائل الصوتية. الآن مباشرة، أو بموعد تختاره.</p>
+      <p class="note">جلسة مدفوعة للكلام والاستماع. ليست علاجاً نفسياً، وليست مساعدة طوارئ.</p>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="you" aria-labelledby="t-you">
+  <div class="ident">
+    <div class="rise">
+      <span class="kicker">هويتك</span>
+      <h2 class="h2" id="t-you">أنت تختار وش يظهر</h2>
+      <ul class="ticks">
+        <li><span><strong>اسم مستخدم خاص فيك</strong>، ما يتكرر عند أحد غيرك.</span></li>
+        <li><span><strong>صورة اختيارية</strong>، تظهرها أو تخفيها متى ما تبي.</span></li>
+        <li><span><strong>بريدك ورقم جوالك</strong> ما يظهرون لأي مستخدم.</span></li>
+        <li><span><strong>بلّغ أو احظر</strong> من أي محادثة، بضغطة.</span></li>
+      </ul>
+    </div>
+    <div class="idwrap rise d1">
+      <div class="idcard glass">
+        <div class="row">
+          <span class="avatar" role="img" aria-label="صورة الحساب"></span>
+          <div><span class="uname">@layl.night</span><small data-state data-on="الصورة ظاهرة" data-off="الصورة مخفية">الصورة ظاهرة</small></div>
+        </div>
+        <div class="setting">
+          <span id="lbl-photo">إظهار الصورة</span>
+          <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="lbl-photo" data-show-photo></button>
+        </div>
+        <p class="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>البريد والجوال: لا يظهران لأحد</p>
+      </div>
+      <span class="demo-label">مثال توضيحي</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="plans" aria-labelledby="t-plans">
+  <div class="rise">
+    <span class="kicker">الاشتراك</span>
+    <h2 class="h2" id="t-plans">Plus يفتح لك كل الخدمات</h2>
+    <p class="sub">اشتراك Plus مطلوب لاستخدام العالم والمحادثة الثنائية والجلسة الموثوقة.</p>
+  </div>
+  <div class="plans">
+    <div class="plan glass first rise d1">
+      <h3>أول شهرين</h3>
+      <div class="price"><b>129</b><span>درهم لأول شهرين</span></div>
+      <p>بعدها 88 درهم شهرياً.</p>
+    </div>
+    <div class="plan glass rise d2">
+      <h3>شهري</h3>
+      <div class="price"><b>88</b><span>درهم / شهر</span></div>
+      <p>يتجدد كل شهر.</p>
+    </div>
+    <div class="plan glass rise d3">
+      <h3>سنوي</h3>
+      <div class="price"><b>449</b><span>درهم / سنة</span></div>
+      <p>يتجدد كل سنة.</p>
+    </div>
+  </div>
+  <div class="trusted glass rise">
+    <div>
+      <h3>الجلسة الموثوقة</h3>
+      <p class="lead">تُدفع لكل ساعة، مع اشتراك Plus.</p>
+    </div>
+    <div class="two">
+      <div><div class="price"><b>50</b><span>درهم / ساعة</span></div><p>مباشرة الآن</p></div>
+      <div><div class="price"><b>30</b><span>درهم / ساعة</span></div><p>بموعد محجوز</p></div>
+    </div>
+  </div>
+  <p class="fine rise">الأسعار هنا بالدرهم الإماراتي، وتظهر لك في App Store بعملة بلدك. الدفع والتجديد والإلغاء عن طريق حساب Apple، وتقدر تلغي التجديد من الإعدادات في أي وقت.</p>
+</section>
+
+<section class="sec" id="safety" aria-labelledby="t-safety">
+  <div class="rise">
+    <span class="kicker">الأمان</span>
+    <h2 class="h2" id="t-safety">مكان هادئ يحتاج قواعد واضحة</h2>
+  </div>
+  <div class="safety">
+    <div class="glass rise d1"><span class="age">18+</span><h3>للبالغين فقط</h3><p>التطبيق مخصص لمن عمره 18 سنة أو أكثر.</p></div>
+    <div class="glass rise d2"><h3>إشراف وبلاغات</h3><p>الغرف تحت إشراف فعلي. تقدر تبلّغ أو تحظر من أي محادثة، وفريق الإشراف يراجع البلاغات.</p></div>
+    <div class="glass rise d3"><h3>ليست بديلاً عن المساعدة</h3><p>الجلسة الموثوقة ليست علاجاً ولا خدمة طوارئ. إذا كنت في خطر، اتصل برقم الطوارئ في بلدك.</p></div>
+  </div>
+</section>
+
+<section class="closing rise" aria-labelledby="t-close">
+  <h2 id="t-close"><span class="mark">nobody.<svg class="arc" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="100" stroke="url(#arcg)" d="M9.3 22.7A49 49 0 0 1 93 73.5"/></svg></span></h2>
+  <p>قول اللي ما قلته لأحد.</p>
+  <div class="pills"><span class="pill glass gold"><span class="dot" aria-hidden="true"></span>قريباً على App Store · iPhone</span></div>
+</section>
 </main>
-<footer><div><a href="/legal/terms-ar.html">شروط الاستخدام</a><a href="/legal/privacy-ar.html">الخصوصية</a><a href="/legal/community-guidelines-ar.html">إرشادات المجتمع</a><a href="/legal/child-safety-ar.html">حماية الأطفال</a></div><div>© 2026 nobody.</div></footer>
-</div></body></html>
+
+<footer class="foot">
+  <div class="cols">
+    <a class="mark" href="/" aria-label="nobody. الصفحة الرئيسية">nobody.</a>
+    <nav aria-label="روابط قانونية">
+      <a href="/legal/terms-ar.html">شروط الاستخدام</a>
+      <a href="/legal/privacy-ar.html">سياسة الخصوصية</a>
+      <a href="/legal/community-guidelines-ar.html">إرشادات المجتمع</a>
+      <a href="/legal/child-safety-ar.html">حماية الأطفال</a>
+      <a href="/support/">الدعم</a>
+    </nav>
+    <a class="email" href="mailto:support@nobaady.com">support@nobaady.com</a>
+  </div>
+  <div class="meta">
+    <span dir="ltr">© 2026 nobody.</span>
+    <span>صور الأرض: NASA Black Marble</span>
+    <a href="/en/" lang="en" hreflang="en">English</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
