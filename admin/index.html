@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'unsafe-inline'; connect-src https://ihqeohtfqwyyaiasoyta.supabase.co wss://ihqeohtfqwyyaiasoyta.supabase.co; img-src data: https://ihqeohtfqwyyaiasoyta.supabase.co; media-src https://ihqeohtfqwyyaiasoyta.supabase.co; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-lQlEhW8sHY+7xtkUgGwsh58dAeGhX+8nhvLr/VvJdhE=' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js; style-src 'unsafe-inline'; connect-src https://ihqeohtfqwyyaiasoyta.supabase.co wss://ihqeohtfqwyyaiasoyta.supabase.co; img-src data: https://ihqeohtfqwyyaiasoyta.supabase.co; media-src https://ihqeohtfqwyyaiasoyta.supabase.co; base-uri 'none'; form-action 'none'">
 <title>nobody. | الفريق</title>
 <style>
 :root{--ink:#141110;--panel:#1d1917;--raise:#262120;--ivory:#f5efe6;--muted:#cfc4ba;--gold:#e8c88f;--line:rgba(255,255,255,.14);--red:#ef8d7c;--green:#9fd3a8}
@@ -118,6 +118,8 @@ const ERRORS = {
   RATE_LIMITED: 'رسائل كثيرة بسرعة، انتظر دقيقة.',
   VOICE_NOT_FOUND: 'الملف الصوتي غير موجود.',
   VOICE_TOO_LONG: 'الملف الصوتي طويل.',
+  REPORT_LIMIT: 'وصلت حد البلاغات لهذي الساعة، جرّب بعدين.',
+  REASON_INVALID: 'اختر سبب البلاغ.',
 };
 const REASONS = { abuse: 'إساءة', harassment: 'مضايقة', threat: 'تهديد', impersonation: 'انتحال', self_harm: 'إيذاء النفس', sexual: 'محتوى جنسي', spam: 'إزعاج', minor: 'قاصر' };
 const ACTIONS = { dismiss: 'رفض البلاغ', hide_message: 'إخفاء الرسالة', warn: 'تحذير', suspend: 'إيقاف', ban: 'حظر' };
@@ -343,7 +345,8 @@ function reportCard(r) {
   const note = h('input', { placeholder: 'ملاحظة القرار، مطلوبة' });
   const body = r.message_snapshot
     ? h('div', { class: 'quote' }, r.message_snapshot)
-    : h('p', { class: 'muted' }, r.has_voice ? 'بلاغ عن رسالة صوتية، الملف ما يظهر هنا.' : 'بلاغ عن حساب، بدون رسالة.');
+    : r.voice_path && open ? voicePlayer(r.voice_path)
+    : h('p', { class: 'muted' }, r.has_voice ? 'رسالة صوتية، الملف انحذف بعد القرار.' : 'بلاغ عن حساب، بدون رسالة.');
   const pick = (action) => h('button', {
     class: action === 'ban' || action === 'suspend' ? 'danger' : '',
     hidden: action === 'hide_message' && !r.message_id,
@@ -370,6 +373,20 @@ function reportCard(r) {
       r.target_id ? h('button', { class: 'link', onclick: () => openUser(r.target_id) }, 'فتح الحساب') : null),
     open ? [note, h('div', { class: 'row', style: 'margin-top:10px' }, Object.keys(ACTIONS).map(pick))]
          : h('p', { class: 'muted' }, 'القرار: ', ACTIONS[r.resolution] || '-', ' · ', when(r.resolved_at)));
+}
+
+// The file opens only for staff with the second factor, and only while its report is open.
+function voicePlayer(path) {
+  const box = h('div', { class: 'quote' });
+  const play = h('button', { onclick: () => act(play, async () => {
+    const { data, error } = await db.storage.from('voice').createSignedUrl(path, 600);
+    if (error) throw error;
+    const audio = h('audio', { controls: true, src: data.signedUrl, 'aria-label': 'الرسالة الصوتية المبلغ عنها' });
+    clear(box, audio);
+    audio.play().catch(() => {});
+  }) }, 'تشغيل الرسالة الصوتية');
+  clear(box, play);
+  return box;
 }
 
 // ---------- photos ----------
@@ -551,10 +568,22 @@ async function openChat(s) {
   const log = h('div', { class: 'chatlog', tabindex: '0', 'aria-label': 'الرسائل', 'aria-live': 'polite' });
   const text = h('input', { maxlength: '500', placeholder: 'اكتب رسالتك', 'aria-label': 'رسالتك' });
   const send = h('button', { class: 'main', type: 'submit' }, 'إرسال');
+  const block = h('button', { class: 'danger', onclick: () => {
+    if (!confirm('حظر هذا الشخص؟ الجلسة تنقفل ولا يقدر يحجز معك بعدها.')) return;
+    act(block, async () => {
+      const { data, error } = await db.from('my_conversations').select('peer_ref').eq('conversation_id', s.conversation_id).maybeSingle();
+      if (error) throw error;
+      if (!data || !data.peer_ref) throw new Error('NOT_FOUND');
+      await call('block_user', { ref: data.peer_ref });
+      toast('تم الحظر وانقفلت الجلسة.');
+      stopChat();
+      await Promise.all([loadSessions(), loadState()]);
+    });
+  } }, 'حظر');
   clear(chatBox, h('div', { class: 'card' },
     h('div', { class: 'row', style: 'justify-content:space-between;margin-bottom:10px' },
       h('h2', { style: 'margin:0' }, s.public_name),
-      h('button', { onclick: stopChat }, 'إغلاق')),
+      h('span', { class: 'row' }, block, h('button', { onclick: stopChat }, 'إغلاق'))),
     log,
     h('form', { class: 'row', onsubmit: (ev) => {
       ev.preventDefault();
@@ -588,13 +617,29 @@ async function refreshChat() {
   const end = here.log.scrollHeight - here.log.scrollTop - here.log.clientHeight < 60;
   for (const m of data.reverse()) {
     if (here.seen.has(m.id)) continue;
-    const el = h('div', { class: 'msg' + (m.public_name === HOST_NAME ? ' mine' : '') },
-      h('small', {}, m.public_name, ' · ', when(m.created_at)), m.body);
+    const mine = m.public_name === HOST_NAME;
+    const el = h('div', { class: 'msg' + (mine ? ' mine' : '') },
+      h('small', {}, m.public_name, ' · ', when(m.created_at), ' ', mine ? null : h('button', { class: 'link', onclick: () => reportForm(el, m) }, 'بلاغ')),
+      m.body);
     here.seen.set(m.id, el);
     here.log.append(el);
     if (m.voice_path) addVoice(el, m);
   }
   if (end) here.log.scrollTop = here.log.scrollHeight;
+}
+// A report closes the session at once, the same as in the app.
+function reportForm(el, m) {
+  if (el.querySelector('select')) return;
+  const reason = h('select', { 'aria-label': 'سبب البلاغ' }, h('option', { value: '' }, 'سبب البلاغ'),
+    Object.entries(REASONS).map(([k, v]) => h('option', { value: k }, v)));
+  const send = h('button', { class: 'danger', onclick: () => act(send, async () => {
+    if (!reason.value) throw new Error('REASON_INVALID');
+    await call('report', { message_id: m.id, reason: reason.value });
+    toast('وصل البلاغ وانقفلت الجلسة.');
+    stopChat();
+    await Promise.all([loadSessions(), loadState()]);
+  }) }, 'إرسال البلاغ');
+  el.append(h('div', { class: 'row', style: 'margin-top:6px' }, h('div', { class: 'grow' }, reason), send));
 }
 async function addVoice(el, m) {
   const { data, error } = await db.storage.from('voice').createSignedUrl(m.voice_path, 3600);

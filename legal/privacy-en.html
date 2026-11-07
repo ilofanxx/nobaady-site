@@ -40,17 +40,16 @@ a{color:#191715}
   <h2>2. What we collect</h2>
   <table>
     <tr><th>Data</th><th>Details</th><th>Why</th></tr>
-    <tr><td>Account ID, device identifier, session token</td><td>Random internal ID; a device/installation identifier; a token that keeps you signed in</td><td>Run your account, prevent duplicate or banned accounts, security</td></tr>
+    <tr><td>Account ID and session token</td><td>An internal ID and a token that keeps you signed in</td><td>Run your account, prevent duplicate or banned accounts, security</td></tr>
     <tr><td>Email and phone number</td><td>Required to register. Your email is confirmed with a code. Never shown to other users</td><td>Sign-in, account recovery, one person one account, keeping banned people out, safety and legal requests</td></tr>
     <tr><td>Username and generated alias</td><td>A username you choose, and an alias we generate. You choose which one others see</td><td>Show you to other users; our team can always see both</td></tr>
     <tr><td>Profile photo (optional)</td><td>A photo you upload or a symbol you pick. Uploaded photos are checked by our moderators before anyone else can see them. You can hide or remove your photo at any time</td><td>Show you to other users when you turn it on; moderation</td></tr>
-    <tr><td>Locale and country/region</td><td>App language and the region you choose for rooms; approximate country from your IP for matching and legal compliance</td><td>Language matching, room selection, applying local law</td></tr>
+    <tr><td>Language and rooms</td><td>The app language and the rooms you open</td><td>Show you the right rooms and language</td></tr>
     <tr><td>Messages</td><td>Text you send in The World, One-to-one and Trusted, with timestamps and the account IDs involved</td><td>Deliver the chat, moderation, safety, legal obligations</td></tr>
     <tr><td>Voice messages</td><td>Recordings you send in a Trusted session. Your voice can identify you. Rooms and one-to-one chats do not accept voice</td><td>Deliver the session, safety, legal obligations</td></tr>
     <tr><td>Reports and blocks</td><td>Who reported whom, the reason, and the reported messages</td><td>Enforce our rules, protect users, respond to authorities</td></tr>
     <tr><td>Moderation records</td><td>Warnings, mutes, suspensions, bans and the audit log of moderator actions</td><td>Accountability, appeals, legal compliance</td></tr>
     <tr><td>Subscription status</td><td>Whether Plus is active, plan and expiry, Trusted session purchases and bookings, and a store transaction identifier from Apple or Google</td><td>Unlock Plus features. <strong>We never receive your card number</strong></td></tr>
-    <tr><td>Technical and crash data</td><td>App version, OS version, device model, crash reports, minimal aggregated usage events</td><td>Keep the app working, fix bugs</td></tr>
   </table>
   <p>We do not ask for your legal name, and we do not collect your contacts, precise location or payment card details. We do not sell personal data and we do not show third-party advertising.</p>
 
@@ -61,12 +60,11 @@ a{color:#191715}
   <ul>
     <li><strong>What other users see.</strong> Your username or your generated alias, and your photo only if you turn it on. They never see your email, phone number, account ID, device or IP address.</li>
     <li><strong>What we hold.</strong> Your email, phone number, username, alias and photo are recorded on your account even when hidden, and our servers know which account and device sent each message. Access is limited to authorised staff and every access is logged. This is what allows reporting, blocking, bans and responding to lawful requests.</li>
-    <li><strong>Invisible Mode</strong> hides you from member lists and online counts. It does not hide you from us.</li>
-    <li><strong>Leave No Trace</strong> removes the messages from both participants' screens when a chat ends. A limited safety log (account IDs, timestamps, and message content needed to investigate reports) is retained for the period in the table below, then deleted.</li>
+    <li>Messages in one-to-one and Trusted chats disappear from both screens when a chat ends. A limited safety log (account IDs, timestamps, and message content needed to investigate reports) is retained for the period in the table below, then deleted.</li>
     <li><strong>Encryption.</strong> Messages are encrypted in transit (TLS) and at rest. They are <strong>not end-to-end encrypted</strong>: our moderation team can read messages when a report is made or when required by law, under audit logging.</li>
   </ul>
 
-  <h2 id="delete">5. How long we keep data (proposed defaults)</h2>
+  <h2 id="delete">5. How long we keep data </h2>
   <table>
     <tr><th>Data</th><th>Retention</th></tr>
     <tr><td>Email, phone number, username and photo</td><td>While your account exists; deleted within 30 days after you delete it. A keyed hash of the phone number is kept for banned accounts to stop re-registration</td></tr>
@@ -77,13 +75,12 @@ a{color:#191715}
     <tr><td>Reports, blocks and moderation records</td><td>12 months from closure of the case, longer if required for a legal proceeding</td></tr>
     <tr><td>Account data after you delete your account</td><td>Deleted within 30 days; bans and CSAE-related records may be kept as hashes or minimal records to prevent re-registration and to meet legal duties</td></tr>
     <tr><td>Subscription records</td><td>As long as required by tax and accounting law (typically 5 years in the UAE)</td></tr>
-    <tr><td>Crash and analytics data</td><td>Up to 13 months, aggregated or deleted</td></tr>
   </table>
 
   <h2>6. Who we share data with</h2>
   <ul>
     <li><strong>Our moderation team</strong>, under access controls and audit logs, to review reports.</li>
-    <li><strong>Service providers</strong> that host our servers, send verification codes by SMS and email, store and help moderate profile photos, deliver push notifications, and process crash reports, under contracts that limit their use of data.</li>
+    <li><strong>Service providers</strong> that host our servers, run our servers and database (Supabase) and send sign-in codes and safety alerts by email (Resend), under contracts that limit their use of data.</li>
     <li><strong>Apple and Google</strong>, which process payments. We only receive subscription status, not card data.</li>
     <li><strong>Law enforcement, courts and regulators</strong> when we receive a lawful request, when we are required to report (for example child sexual abuse material to NCMEC or the competent Gulf authority), or when necessary to prevent imminent harm.</li>
     <li>A <strong>successor</strong> if our company is sold or merged, under the same protections.</li>
@@ -93,7 +90,7 @@ a{color:#191715}
   <p>Our servers are located in Mumbai, India. If you use nobody. from a Gulf country, your data may be transferred to and processed in that region. Where required by the UAE PDPL (Federal Decree-Law 45/2021), the Saudi PDPL or other applicable laws, we rely on an adequacy decision, approved contractual safeguards, or your explicit consent, and we apply the same protections wherever the data is held.</p>
 
   <h2>8. Your rights</h2>
-  <p>Subject to applicable law you may: <strong>access</strong> the personal data we hold about you; <strong>export</strong> it in a readable format (Me → My data); <strong>correct</strong> your username, photo, email, phone number and settings; <strong>delete</strong> your account and data (Me → Delete account); <strong>object</strong> to or restrict certain processing; and <strong>withdraw consent</strong>. You may also complain to the UAE Data Office, the Saudi Data &amp; AI Authority (SDAIA) or your local regulator. To exercise a right not available in-app, email <a href="mailto:dpo@nobaady.com">dpo@nobaady.com</a> from within the app so we can verify your account; we respond within 30 days.</p>
+  <p>Subject to applicable law you may: <strong>access</strong> the personal data we hold about you; <strong>export</strong> it in a readable format by emailing <a href="mailto:dpo@nobaady.com">dpo@nobaady.com</a>; you can see your account details in Me → My data; <strong>correct</strong> your username, photo, email, phone number and settings; <strong>delete</strong> your account and data (Me → Delete account); <strong>object</strong> to or restrict certain processing; and <strong>withdraw consent</strong>. You may also complain to the UAE Data Office, the Saudi Data &amp; AI Authority (SDAIA) or your local regulator. To exercise a right not available in-app, email <a href="mailto:dpo@nobaady.com">dpo@nobaady.com</a> from within the app so we can verify your account; we respond within 30 days.</p>
 
   <h2>9. Children</h2>
   <p>nobody. is for adults aged 18 and over. We do not knowingly collect data from anyone under 18. If we learn that an account belongs to a minor, we terminate it and delete its data, keeping only what the law requires. If you believe a minor is using nobody., tell us at <a href="mailto:safety@nobaady.com">safety@nobaady.com</a>. See our <a href="child-safety-en.html">Child Safety Standards</a>.</p>
