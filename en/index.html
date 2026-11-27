@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>nobody. | Say what you never told anyone</title>
-<meta name="description" content="nobody. is an iPhone and Android app for adults 18+: rooms by country and language, private chats that open only on acceptance, and a trusted session with the host. You choose what others see. Coming soon on the App Store and Google Play.">
+<meta name="description" content="nobody. is an iPhone and Android app for adults 18+: rooms by country and language, private chats that open only on acceptance, and a trusted session with the host. You choose what others see. Out now on Google Play. Coming soon on the App Store.">
 <meta name="theme-color" content="#141110">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:title" content="nobody. | Say what you never told anyone">
-<meta property="og:description" content="A calm place to talk, where you choose what others see. Adults 18+. Coming soon on the App Store and Google Play.">
+<meta property="og:description" content="A calm place to talk, where you choose what others see. Adults 18+. Out now on Google Play. Coming soon on the App Store.">
 <meta property="og:image" content="https://nobaady.com/img/share.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,8 +26,10 @@
 <link rel="apple-touch-icon" href="/img/icon-180.png">
 <link rel="preload" as="image" href="/img/hero-800.jpg" imagesrcset="/img/hero-800.jpg 860w, /img/hero.jpg 1400w" imagesizes="(min-width:900px) 440px, 100vw">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/home.css">
 <script>(function(d){if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('motion');d.classList.add('js');setTimeout(function(){if(!window.__nobody)d.classList.remove('js')},2500)})(document.documentElement)</script>
 <script src="/js/site.js" defer></script>
+<script src="/js/home.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -63,9 +65,14 @@
     <h1 id="t-hero"><span class="mark">nobody.<svg class="arc" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="100" stroke="url(#arcg)" d="M9.3 22.7A49 49 0 0 1 93 73.5"/></svg></span></h1>
     <p class="tagline">Say what you never told anyone.</p>
     <p class="lede">A calm place to talk. You pick your name and photo, and you decide what others see.</p>
-    <div class="pills">
-      <span class="pill glass gold"><span class="dot" aria-hidden="true"></span>Coming soon on the App Store and Google Play</span>
-      <span class="pill glass">Adults 18+ only</span>
+    <div class="get">
+      <a class="btn-dl" href="https://play.google.com/store/apps/details?id=com.nobaady.nobody" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 3.4v17.2c0 .9 1 1.500 1.800 1l14-8.600c.7-.4.7-1.500 0-2l-14-8.600C7 1.900 6 2.500 6 3.400z"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+      <span class="soon glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.500" width="10" height="19" rx="2.600"/><path d="M11 18.500h2"/></svg>iPhone · coming soon</span>
+    </div>
+    <p class="trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.800v5.400c0 4.300-2.900 7.700-7 9.300-4.100-1.600-7-5-7-9.300V5.800L12 3z"/><path d="M9 12l2.200 2.200L15.200 10"/></svg><span>For adults 18+, moderated</span></p>
+    <div class="qr glass">
+      <img src="/img/qr-play.svg" width="104" height="104" alt="QR code that opens nobody. on Google Play">
+      <div><b>Scan with your phone camera</b><small>Opens nobody. on Google Play</small></div>
     </div>
   </div>
 </section>
@@ -121,6 +128,29 @@
   </div>
 </section>
 
+<section class="sec" id="inside" aria-labelledby="t-inside">
+  <div class="rise">
+    <span class="kicker">Inside the app</span>
+    <h2 class="h2" id="t-inside">Real screens from the app</h2>
+    <p class="sub">Three screens, as you see them on your phone.</p>
+  </div>
+  <div class="shots">
+    <figure class="shot rise d1">
+      <div class="phone"><img src="/img/screen-room.webp" width="540" height="1212" decoding="async" alt="A public room in the app with messages and the count of messages left today"></div>
+      <figcaption><b>Rooms</b><span>Read and write, with your daily count in view.</span></figcaption>
+    </figure>
+    <figure class="shot rise d2">
+      <div class="phone"><img src="/img/screen-private.webp" width="540" height="1212" decoding="async" alt="The private chats screen in the app"></div>
+      <figcaption><b>Private chats</b><span>They open only when both people agree.</span></figcaption>
+    </figure>
+    <figure class="shot rise d3">
+      <div class="phone"><img src="/img/screen-trusted.webp" width="540" height="1212" decoding="async" alt="The Trusted session screen in the app with talk now and book a time"></div>
+      <figcaption><b>Trusted session</b><span>An hour with the host, now or booked.</span></figcaption>
+    </figure>
+  </div>
+  <p class="shots-note rise">Captured from the current Android version, shown in Arabic. The app also runs in English.</p>
+</section>
+
 <section class="sec" id="you" aria-labelledby="t-you">
   <div class="ident">
     <div class="rise">
@@ -153,29 +183,45 @@
 <section class="sec" id="plans" aria-labelledby="t-plans">
   <div class="rise">
     <span class="kicker">Plans</span>
-    <h2 class="h2" id="t-plans">Start with a daily allowance. Plus opens the rest</h2>
-    <p class="sub">Without a subscription you can read every room, send 10 messages a day and accept one private chat request a day. Plus removes the daily limit, lets you ask for private chats and lets you book Trusted sessions. Final prices are shown in the store for your country.</p>
+    <h2 class="h2" id="t-plans">Start free. Plus opens the rest</h2>
+    <p class="sub">You begin with a daily allowance at no cost. Final prices are shown in the store for your country.</p>
   </div>
   <div class="plans">
-    <div class="plan glass first rise d1">
-      <h3>First 2 months</h3>
-      <div class="price"><b>129</b><span>AED for the first 2 months</span></div>
-      <p>Then 88 AED per month.</p>
+    <div class="plan glass free rise d1">
+      <h3>Free</h3>
+      <div class="price"><b>0</b><span>AED</span></div>
+      <ul class="inc">
+        <li><span>Read every room</span></li>
+        <li><span>Write 10 room messages a day</span></li>
+        <li><span>Accept 1 private chat request a day</span></li>
+      </ul>
     </div>
-    <div class="plan glass rise d2">
-      <h3>Monthly</h3>
+    <div class="plan glass first rise d2">
+      <h3>Plus monthly <span class="tag">Intro offer</span></h3>
       <div class="price"><b>88</b><span>AED / month</span></div>
-      <p>Renews every month.</p>
+      <p class="offer">First 2 months for 129 AED, then 88 a month.</p>
+      <ul class="inc">
+        <li><span>No daily message limit</span></li>
+        <li><span>Ask for private chats</span></li>
+        <li><span>Book Trusted sessions</span></li>
+      </ul>
     </div>
     <div class="plan glass rise d3">
-      <h3>Yearly</h3>
+      <h3>Plus yearly</h3>
       <div class="price"><b>449</b><span>AED / year</span></div>
-      <p>Renews every year.</p>
+      <ul class="inc">
+        <li><span>Everything in Plus</span></li>
+        <li><span>Renews every year</span></li>
+      </ul>
     </div>
     <div class="plan glass rise d3">
       <h3>Signature</h3>
       <div class="price"><b>149</b><span>AED / month</span></div>
-      <p>Or 1,200 AED a year with two Trusted sessions. Everything in Plus, a badge beside your name, and your name in gold.</p>
+      <ul class="inc">
+        <li><span>Everything in Plus</span></li>
+        <li><span>A badge beside your name, and your name in gold</span></li>
+        <li><span>Or 1,200 AED a year with two Trusted sessions</span></li>
+      </ul>
     </div>
   </div>
   <div class="trusted glass rise">
@@ -206,7 +252,15 @@
 <section class="closing rise" aria-labelledby="t-close">
   <h2 id="t-close"><span class="mark">nobody.<svg class="arc" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="100" stroke="url(#arcg)" d="M9.3 22.7A49 49 0 0 1 93 73.5"/></svg></span></h2>
   <p>Say what you never told anyone.</p>
-  <div class="pills"><span class="pill glass gold"><span class="dot" aria-hidden="true"></span>Coming soon on the App Store · iPhone</span><span class="pill glass gold"><span class="dot" aria-hidden="true"></span>Coming soon on Google Play · Android</span></div>
+  <div class="get rise d1">
+    <a class="btn-dl" href="https://play.google.com/store/apps/details?id=com.nobaady.nobody" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 3.4v17.2c0 .9 1 1.500 1.800 1l14-8.600c.7-.4.7-1.500 0-2l-14-8.600C7 1.900 6 2.500 6 3.400z"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
+    <span class="soon glass"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.500" width="10" height="19" rx="2.600"/><path d="M11 18.500h2"/></svg>iPhone · coming soon</span>
+  </div>
+  <p class="trust rise d2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 2.800v5.400c0 4.300-2.900 7.700-7 9.300-4.100-1.600-7-5-7-9.300V5.800L12 3z"/><path d="M9 12l2.200 2.200L15.200 10"/></svg><span>For adults 18+, moderated</span></p>
+  <div class="qr glass rise d2">
+      <img src="/img/qr-play.svg" width="104" height="104" alt="QR code that opens nobody. on Google Play">
+      <div><b>Scan with your phone camera</b><small>Opens nobody. on Google Play</small></div>
+    </div>
 </section>
 </main>
 
@@ -219,8 +273,13 @@
       <a href="/legal/community-guidelines-en.html">Community Guidelines</a>
       <a href="/legal/child-safety-en.html">Child Safety</a>
       <a href="/support/en.html">Support</a>
+      <a href="/support/en.html#delete">Delete account</a>
     </nav>
     <a class="email" href="mailto:support@nobaady.com">support@nobaady.com</a>
+  </div>
+  <div class="who">
+    <p><strong>Operated by:</strong> <span class="co">PNEUMA GENERAL TRADING L.L.C - O.P.C</span>, Abu Dhabi, United Arab Emirates.</p>
+    <p id="delete-account"><strong>Delete your account:</strong> in the app, go to Me › Delete account. If you cannot sign in, email <a href="mailto:support@nobaady.com">support@nobaady.com</a> from your registered address and we delete the account and its data within 30 days. <a href="/support/en.html#delete">How to delete your account, step by step</a></p>
   </div>
   <div class="meta">
     <span>© 2026 nobody.</span>
@@ -228,6 +287,11 @@
     <a href="/" lang="ar" hreflang="ar">العربية</a>
   </div>
 </footer>
+</div>
+<div class="stick" data-stick role="region" aria-label="Download bar">
+  <img src="/img/icon-48.png" width="38" height="38" alt="">
+  <div class="stick-t"><b>nobody.</b><small>For adults 18+, moderated</small></div>
+  <a class="btn-dl" href="https://play.google.com/store/apps/details?id=com.nobaady.nobody" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 3.4v17.2c0 .9 1 1.500 1.800 1l14-8.600c.7-.4.7-1.500 0-2l-14-8.600C7 1.900 6 2.500 6 3.400z"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>
 </div>
 </body>
 </html>
